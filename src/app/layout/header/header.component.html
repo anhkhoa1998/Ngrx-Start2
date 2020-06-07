@@ -1,0 +1,87 @@
+<div class="header">
+  <div class="header__icon">
+    <div class="header__icon__none nav" *ngIf="headerIcon">
+      <a><i class="fa fa-calendar-minus-o nav-icon"></i></a>
+      <a><i class="fa fa-envelope-o nav-icon"></i></a>
+      <a><i class="fa fa-address-book-o nav-icon"></i></a>
+      <a><i class="fa fa-check-square nav-icon"></i></a>
+    </div>
+
+    <div class="dropdown">
+      <i class="fa fa-star margin-left-dropdown" (click)="choseItem()"></i>
+      <div class="header__icon__item" *ngIf="statusItem">
+        <div class="d-flex-center">
+          <p><u>Search for an app or a page</u></p>
+        </div>
+        <hr>
+        <ul class="dropdown-menu">
+          <div class="dropdown-menu-item">
+            <li class="dropdown-item">
+              <a>
+                <i class="fa fa-calendar-minus-o menu-icon"></i>Calender
+              </a>
+            </li>
+            <i class="fa fa-star margin-right"></i>
+          </div>
+          <div class="dropdown-menu-item">
+            <li class="dropdown-item">
+              <a>
+                <i class="fa fa-envelope-o menu-icon"></i>Mail
+              </a>
+            </li>
+            <i class="fa fa-star margin-right"></i>
+          </div>
+          <div class="dropdown-menu-item">
+            <li class="dropdown-item">
+              <a>
+                <i class="fa fa-address-book-o menu-icon"></i>Contacts
+              </a>
+            </li>
+            <i class="fa fa-star margin-right"></i>
+          </div>
+          <div class="dropdown-menu-item">
+            <li class="dropdown-item">
+              <a>
+                <i class="fa fa-check-square menu-icon"></i>To-do
+              </a>
+            </li>
+            <i class="fa fa-star margin-right"></i>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="header__user" *ngIf="headerItem">
+    <div class=" dropdown-menu border-item d-flex" (click)="choseMenu()">
+      <img src="/assets/image/Velazquez.jpg" alt="Charlie Adams" class="avatar">
+      <div class="header__user__name">
+        <p class="name">Charlie Adams</p>
+      </div>
+      <a><i class="fa fa-angle-down margin-right"></i></a>
+      <div class="header__user__item" *ngIf="status">
+        <ul>
+          <li class="dropdown-item">
+            <a class="user-info">
+              <i class="fa fa-user-circle menu-icon"></i>My Profile
+            </a>
+          </li>
+          <li class="dropdown-item">
+            <a class="user-info">
+              <i class="fa fa-envelope-o menu-icon"></i>Inbox
+            </a>
+          </li>
+          <li class="dropdown-item" (click)="logOut()">
+            <a class="user-info">
+              <i class="fa fa-sign-out menu-icon"></i>Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-item d-flex flag ">
+      <img src="/assets/image/us.png" class="img-flag">
+      <p>EN</p>
+    </div>
+  </div>
+</div>

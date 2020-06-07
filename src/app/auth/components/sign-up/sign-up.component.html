@@ -1,0 +1,83 @@
+<div class="container-form">
+  <div class="container-form__content">
+    <div class="container-form__content__logo">
+      <img src="/assets/image/fuse.svg" alt="Logo">
+    </div>
+
+    <h4>CREATE AN ACCOUNT</h4>
+
+    <form #formAuth="ngForm" (ngSubmit)="onSubmit(formAuth)" class="container-form__content__form">
+
+      <div class="form-group mb-3">
+
+        <input type="text" class="form-control" placeholder="First name" name="firstname" #firstName="ngModel"
+               [(ngModel)]="user.firstName" required
+               [ngClass]="{'is-invalid':firstName.invalid && (firstName.dirty || firstName.touched)}">
+
+        <div class="invalid-feedback" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+          <div *ngIf="firstName.errors.required">*First name is required.</div>
+        </div>
+      </div>
+      <div class="form-group mb-3">
+
+        <input type="text" class="form-control" placeholder="Last name" name="lastname" #lastName="ngModel"
+               [(ngModel)]="user.lastName" required
+               [ngClass]="{'is-invalid':lastName.invalid && (lastName.dirty || lastName.touched)}">
+
+        <div class="invalid-feedback" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+
+          <div *ngIf="lastName.errors.required"> *Last name is required.</div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+
+        <input type="text" class="form-control" name="username" #username="ngModel"
+               [ngClass]="{'is-invalid': username.invalid && (username.dirty || username.touched)  }"
+               [(ngModel)]="user.username" placeholder="Enter username" required>
+
+        <div class="invalid-feedback" *ngIf="username.invalid && (username.dirty || username.touched)">
+          <div *ngIf="username.errors.required"> *Username is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+
+        <input type="password" class="form-control" name="password" #password="ngModel"
+               [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched)  }"
+               [(ngModel)]="user.password" placeholder="Enter password" required>
+
+        <div class="invalid-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
+          <div *ngIf="password.errors.required"> *Password is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+
+        <input type="password" class="form-control" name="confirm-password" #confirm_password="ngModel"
+               [(ngModel)]="confirmPassword"
+               [ngClass]="{'is-invalid': confirmPassword != user.password  && confirm_password.touched  }"
+               placeholder="Enter confirm password" required>
+
+        <div class="invalid-feedback" *ngIf="confirmPassword != user.password && confirm_password.touched">
+          <div *ngIf="confirm_password.errors?.required"> *Password is required.</div>
+          <div *ngIf="confirmPassword != user.password "> *Confirm password does not match the password</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-outline-primary text-uppercase container-form__btn"
+                [disabled]="formAuth.invalid">Create an account
+        </button>
+      </div>
+
+      <div class="link-signin font-italic">
+        <a routerLink="../sign-in" target="_blank"><i class="fa fa-hand-o-right pr-1" aria-hidden="true"></i>Go
+          to Sign-in</a>
+      </div>
+
+    </form>
+  </div>
+
+</div>

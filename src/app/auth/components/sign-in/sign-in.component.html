@@ -1,0 +1,48 @@
+<div class="container-form">
+  <div class="container-form__content">
+    <div class="container-form__content__logo">
+      <img src="/assets/image/fuse.svg" alt="Logo">
+    </div>
+
+    <h4>LOGIN TO YOUR ACCOUNT</h4>
+
+    <form #formAuth="ngForm" (ngSubmit)="onSubmit(formAuth)" class="container-form__content__form">
+
+      <div class="form-group mb-3">
+
+        <input type="text" class="form-control" placeholder="Username" name="username" #username="ngModel"
+               [(ngModel)]="user.username" placeholder="Enter username" required
+               [ngClass]="{'is-invalid':username.invalid && (username.dirty || username.touched)}">
+
+        <div class="invalid-feedback" *ngIf="username.invalid && (username.dirty || username.touched)">
+          <div *ngIf="username.errors.required">*Username is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+
+        <input type="password" class="form-control" name="password" #password="ngModel"
+               [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched)  }"
+               [(ngModel)]="user.password" placeholder="Enter password" required>
+
+        <div class="invalid-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
+          <div *ngIf="password.errors.required">*Password is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-outline-primary text-uppercase container-form__btn"
+                [disabled]="formAuth.invalid">login
+        </button>
+      </div>
+
+      <div class="font-italic linkRegiser">
+        <a routerLink="../register" target="_blank"><i class="fa fa-hand-o-right pr-1"
+                                                       aria-hidden="true"></i>Create an account</a>
+      </div>
+
+
+    </form>
+  </div>
+
+</div>

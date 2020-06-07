@@ -1,0 +1,22 @@
+.pagination-feat {
+  display: flex;
+  justify-content: space-between;
+
+  .pagination {
+    justify-content: space-between;
+    cursor: pointer;
+
+    &__info {
+      font-size: 13px;
+    }
+
+    .is-disabled {
+      pointer-events: none;
+    }
+
+    .page-active {
+      background-color: rgb(35, 39, 43);
+      color: white;
+    }
+  }
+}

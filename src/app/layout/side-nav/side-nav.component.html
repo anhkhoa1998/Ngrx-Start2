@@ -1,0 +1,134 @@
+<div class="info">
+  <div class="info__title">
+    <img src="/assets//image/fuse.svg" alt="" class="info__logo" (click)="toggleSideNav()">
+    <p class="title">FUSE</p>
+    <p class="info__title__bar"><i class=" bar fa fa-bars" aria-hidden="true" (click)="toggleSideNav()"></i></p>
+  </div>
+
+
+  <div class="info__scroll">
+    <div class="info__content" *ngIf="!isCollapse">
+      <p class="info__name">Charlie Adams</p>
+      <p class="info__email">adams.charlie@mail.com</p>
+
+      <div class="info__scroll__avatar">
+        <img src="/assets/image/Copeland.jpg" alt="">
+      </div>
+    </div>
+    <div class="menu">
+      <div class="menu__app">
+        <p class="menu__title" *ngIf="!isCollapse">APPLICATIONS</p>
+        <ul>
+          <li (click)="toggleSubMenu(subMenu.dashboard)">
+            <a>
+              <i class="fa fa-desktop" aria-hidden="true"> </i>
+              <span *ngIf="!isCollapse">Dashboards</span>
+            </a>
+            <i class="next fa fa-angle-right" aria-hidden="true" *ngIf="!isCollapse"></i>
+          </li>
+
+          <ul class="menu_exp" *ngIf="activeSubMenu === subMenu.dashboard">
+            <li><a class="exp__title">Analystic</a></li>
+            <li><a class="exp__title">Project</a></li>
+          </ul>
+
+          <li>
+            <a routerLink="companies">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">Companies</span>
+            </a>
+          </li>
+
+          <li>
+            <a>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">Calendar</span>
+            </a>
+          </li>
+
+          <li (click)="toggleSubMenu(subMenu.eCommerce)">
+            <a>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse"> E-Commerce</span>
+            </a>
+            <i class="next fa fa-angle-right" aria-hidden="true" *ngIf="!isCollapse"></i>
+          </li>
+
+          <ul class="menu_exp" *ngIf="activeSubMenu === subMenu.eCommerce">
+            <li><a class="exp__title">Products</a></li>
+            <li><a class="exp__title">Products Detail</a></li>
+            <li><a class="exp__title">Orders</a></li>
+            <li><a class="exp__title">Orders Detail</a></li>
+          </ul>
+
+          <li>
+            <a>
+              <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">Academy</span>
+            </a>
+          </li>
+
+          <li>
+            <a>
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">Mail</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse"> Mail Ngrx</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <i class="fa fa-commenting" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">Chat</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <i class="fa fa-file" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">File Manager</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <i class="fa fa-address-book-o" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">Contac</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <i class="fa fa-check-square" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">To-Do</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <i class="fa fa-bar-chart" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">Scrumboard</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+
+      <div class="menu__app">
+        <p class="menu__title" *ngIf="!isCollapse">CUSTOM FUNCTION</p>
+        <ul>
+          <li>
+            <a>
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              <span *ngIf="!isCollapse">Customize</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

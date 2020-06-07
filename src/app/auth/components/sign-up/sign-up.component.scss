@@ -1,0 +1,45 @@
+.container-form {
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    height: 710px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h4 {
+      margin-top: 30px;
+    }
+
+    &__logo {
+      padding-top: 30px;
+
+      img {
+        width: 100px;
+      }
+    }
+
+    &__form {
+      width: 400px;
+      padding: 30px;
+    }
+  }
+
+  &__btn {
+    display: block;
+    margin: 40px auto 0px auto;
+    cursor: pointer;
+  }
+
+  .link-signin {
+    display: flex;
+    flex-direction: row-reverse;
+
+    a {
+      font-size: 13px;
+    }
+  }
+}

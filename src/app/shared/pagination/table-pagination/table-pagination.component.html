@@ -1,0 +1,95 @@
+<div class="pagination-feat">
+  <div class="pagination__info">
+    Showing {{itemFrom}} to {{itemTo}} of {{paging.totalCount}} entries
+  </div>
+  <div class="pagination" *ngIf="paginationStyle === 'style-1'">
+    <nav>
+      <ul class="pagination pagination-sm">
+
+        <li class="page-item" (click)="firstPage()" [class.is-disabled]="paging.currentPage <= 1">
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <li class="page-item" (click)="previousPage()" [class.is-disabled]="paging.currentPage <= 1">
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true">Previous</span>
+          </a>
+        </li>
+
+        <ng-container *ngIf="!totalPages!=null">
+          <ng-container class="page-number" *ngFor="let item of totalPages; let index = index">
+            <li [ngClass]="{'active': paging.currentPage === index+1}" class="page-item"
+                (click)="changePageNumber(index+1)">
+              <a class="page-link">{{index + 1}}</a>
+            </li>
+          </ng-container>
+        </ng-container>
+
+
+        <li class="page-item" [class.is-disabled]="paging.currentPage === totalPages.length"
+            (click)="nextPage()">
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true">Next</span>
+          </a>
+        </li>
+
+        <li class="page-item" (click)="lastPage()"
+            [class.is-disabled]="paging.currentPage === totalPages.length">
+          <a class="page-link" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+  </div>
+  <div class="pagination" *ngIf="paginationStyle === 'style-2'">
+    <nav>
+
+      <ul class="pagination pagination-sm">
+
+        <li class="page-item" (click)="firstPage()" [class.is-disabled]="paging.currentPage <= 1">
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true"><i class="fa fa-fast-backward" aria-hidden="true"></i></span>
+          </a>
+        </li>
+
+        <li class="page-item" (click)="previousPage()" [class.is-disabled]="paging.currentPage <= 1">
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true"><i class="fa fa-hand-o-left" aria-hidden="true"></i></span>
+          </a>
+        </li>
+
+        <ng-container *ngIf="!totalPages!=null">
+          <ng-container class="page-number" *ngFor="let item of totalPages; let index = index">
+            <li class="page-item" (click)="changePageNumber(index+1)">
+              <a [ngClass]="{'page-active': paging.currentPage === index+1}"
+                 class="page-link">{{index + 1}}</a>
+            </li>
+          </ng-container>
+        </ng-container>
+
+
+        <li class="page-item" [class.is-disabled]="paging.currentPage === totalPages.length"
+            (click)="nextPage()">
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true"><i class="fa fa-hand-o-right" aria-hidden="true"></i></span>
+          </a>
+        </li>
+
+        <li class="page-item" (click)="lastPage()"
+            [class.is-disabled]="paging.currentPage === totalPages.length">
+          <a class="page-link" aria-label="Next">
+            <span aria-hidden="true"><i class="fa fa-fast-forward" aria-hidden="true"></i></span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+  </div>
+
+</div>

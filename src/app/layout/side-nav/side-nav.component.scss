@@ -1,0 +1,161 @@
+.info {
+  background-color: rgb(30, 33, 40);
+
+  &__scroll {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+    overflow-y: scroll;
+
+    &__avatar {
+      width: 90px;
+      height: 90px;
+      position: absolute;
+      bottom: -45px;
+      left: 50%;
+      transform: translateX(-45px);
+      border-radius: 50%;
+      border: 8px solid rgb(45, 50, 62);
+
+      img {
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &__title {
+    display: flex;
+    padding: 19px 16px 19px 16px;
+    align-items: center;
+    height: 64px;
+
+    .info__logo {
+      width: 28px;
+      height: 24px;
+      line-height: 70px;
+      margin-right: 15px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      color: rgba(207, 206, 206, 0.54);
+      position: relative;
+      margin-bottom: 0px;
+    }
+
+    &__bar {
+      margin-left: auto;
+      margin-bottom: 0px;
+
+      .bar {
+        color: rgba(207, 206, 206, 0.54);
+        font-size: 24px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__content {
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    text-align: center;
+    position: relative;
+
+    .info__name {
+      color: white;
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .info__email {
+      color: rgba(207, 206, 206, 0.54);
+      font-size: 14px;
+      font-weight: 400;
+      padding-top: 10px;
+    }
+  }
+
+  .menu {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(46, 50, 61);
+
+    &__title {
+      color: rgba(167, 164, 164, 0.38);
+      font-size: 15px;
+      padding: 55px 0px 0px 20px;
+      font-weight: 600;
+    }
+
+    &__app {
+      ul {
+        padding-top: 20px;
+
+        li {
+          list-style-type: none;
+          padding-left: 20px;
+          padding-top: 20px;
+          height: 50px;
+          transition: 0.5s;
+
+          &:hover {
+            background-color: rgb(39, 44, 55);
+            border-radius: 20px;
+            cursor: pointer;
+          }
+
+          a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 15px 0px;
+
+            i {
+              font-size: 17px;
+              padding-right: 20px;
+            }
+          }
+
+          .next {
+            float: right;
+            font-size: 16px;
+            color: white;
+            padding-right: 15px;
+          }
+        }
+      }
+
+      .menu_exp {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        li {
+          list-style-type: none;
+          padding-left: 30px;
+          padding-top: 20px;
+          height: 50px;
+          transition: 0.5s;
+
+          &:hover {
+            background-color: rgb(39, 44, 55);
+            border-radius: 20px;
+            cursor: pointer;
+          }
+
+          a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 15px 103px 0px 19px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<div class="containerDefault">
+
+  <app-side-nav [ngClass]="{sidenav:statusSideNav, Unsidenav:!statusSideNav }"
+                (statusSideNav)="getStatusSideNav($event)">
+  </app-side-nav>
+
+  <div class="main__container">
+
+    <header class="header">
+      <app-header></app-header>
+    </header>
+
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer class="footer">
+      <app-footer></app-footer>
+    </footer>
+
+  </div>
+
+</div>

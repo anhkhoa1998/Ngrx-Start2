@@ -1,0 +1,50 @@
+.company {
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    height: 100px;
+
+    &__title {
+      font-weight: 900;
+      font-size: 20px;
+
+      i {
+        font-size: 25px;
+      }
+    }
+  }
+
+  .table-wrapper {
+    padding: 0 24px;
+
+    &__ {
+      .select-entries {
+        width: 100px !important;
+        display: inline-block;
+      }
+    }
+
+    table {
+      font-size: 13px;
+
+      tr {
+        cursor: pointer;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .btn__delete {
+        transition: 0.5s;
+        border: 1px solid rgb(250, 80, 80);
+
+        &:hover {
+          border: 1px solid white;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.company-form {
+  &__btn {
+    display: block;
+    margin: 50px auto 0px auto;
+    padding: 5px 35px;
+    cursor: pointer;
+  }
+}
+.phoneGroup {
+  display: flex;
+}

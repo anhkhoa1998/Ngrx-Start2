@@ -1,0 +1,54 @@
+<div class="company">
+  <div class="company__box">
+    <p class="company__box__title m-0"><i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;&nbsp;Company</p>
+    <a routerLink="./create" class="btn btn-info company__box__btn">Add new company</a>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="table table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Established</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Address</th>
+        <th scope="col">Website</th>
+        <th scope="col">Manipulation</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let company of companies$ | async">
+        <th>{{ company.no }}</th>
+        <td>{{ company.name }}</td>
+        <td><a href="mailto:{{ company.email }}">{{ company.email }}</a></td>
+        <td>{{ company.established | date:"dd/MM/yyyy" }}</td>
+        <td>
+          <p *ngFor="let phoneNumber of company.companyPhoneNumbers">
+            {{ phoneNumber.phoneNumber }}
+          </p>
+        </td>
+        <td>{{ company.address }}</td>
+        <td><a href="{{ company.website }}" target="_blank">{{ company.website }}</a></td>
+        <td>
+          <a class=" btn btn-outline-primary btn-sm btn__update mr-1 "
+             routerLink="./{{ company.id }}/update">Update</a>
+
+          <button type="button" class=" btn btn-outline-danger btn-sm btn__delete"
+                  (click)="deleteCompany(company.id)">Delete
+          </button>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+
+    <app-table-pagination *ngIf="(pageInfo$ | async).totalPages != null"
+                          [paging]="pageInfo$ | async"
+                          [paginationStyle]="'style-1'"
+                          (pageChange)="onPageChange($event)"></app-table-pagination>
+
+  </div>
+</div>

@@ -1,0 +1,35 @@
+$sidenav-width: 280px;
+$sidenav-collapsed-width: 60px;
+
+.containerDefault {
+  display: flex;
+
+  .Unsidenav {
+    width: $sidenav-collapsed-width;
+  }
+
+  .sidenav {
+    width: $sidenav-width;
+    height: 100%;
+  }
+
+  .main__container {
+    flex-grow: 1;
+
+    .header {
+      height: 64px;
+      background-color: rgb(224, 223, 223);
+    }
+
+    .content {
+      height: calc(100vh - 128px);
+      background-color: rgb(252, 252, 252);
+      overflow-y: auto;
+    }
+
+    .footer {
+      height: 64px;
+      background-color: rgb(30, 33, 41);
+    }
+  }
+}
