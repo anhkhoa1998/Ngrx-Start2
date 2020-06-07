@@ -26,9 +26,18 @@
         <td><a href="mailto:{{ company.email }}">{{ company.email }}</a></td>
         <td>{{ company.established | date:"dd/MM/yyyy" }}</td>
         <td>
-          <p *ngFor="let phoneNumber of company.companyPhoneNumbers">
-            {{ phoneNumber.phoneNumber }}
-          </p>
+          <div class="row">
+            <div>
+              <p *ngFor="let phoneNumber of company.companyPhoneNumbers; let i = index">
+                <span *ngIf="showMore || i == 0">{{ phoneNumber.phoneNumber }}</span>
+              </p>
+            </div>
+            <fa-icon [icon]="faAngleDown" class="btn-arrow-down" (click)="show()"></fa-icon>
+          </div>
+          <!--<div class="row">
+            {{company.companyPhoneNumbers[0].phoneNumber}}
+            <fa-icon [icon]="faAngleDown" class="btn-arrow-down"></fa-icon>
+          </div>-->
         </td>
         <td>{{ company.address }}</td>
         <td><a href="{{ company.website }}" target="_blank">{{ company.website }}</a></td>

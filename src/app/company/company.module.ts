@@ -11,6 +11,7 @@ import { COMPONENTS } from './components';
 import { CompanyService } from './services';
 import { StoreModule } from '@ngrx/store';
 import { companyReducer } from '@app/company/reducer/company.reducer';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { companyReducer } from '@app/company/reducer/company.reducer';
     PaginationModule,
     StoreModule.forFeature('company', companyReducer),
     EffectsModule.forFeature([CompanyEffects]),
+    FontAwesomeModule,
   ],
   providers: [
     CompanyService,

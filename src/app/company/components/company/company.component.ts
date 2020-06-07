@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { defaultPagination, PageInfo, Pagination } from '@app/shared';
 
 import Swal from 'sweetalert2';
-
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Company } from '../../models';
 import { CompanyService } from '../../services';
 import { Observable } from 'rxjs';
@@ -20,6 +20,8 @@ import { selectAllCompanies, selectCompanyPageInfo } from '@app/company/Selector
 export class CompanyComponent implements OnInit {
   companies$: Observable<Array<Company>>;
   pageInfo$: Observable<PageInfo>;
+  faAngleDown = faAngleDown;
+  showMore = false;
   constructor(private companyService: CompanyService, private store: Store<CompanyState>) {
   }
   ngOnInit(): void {
@@ -58,5 +60,9 @@ export class CompanyComponent implements OnInit {
 
   onPageChange(page: number) {
     this.store.dispatch(companyActions.changePageNumber({ pageNumber: page }));
+  }
+
+  show(){
+    this.showMore = !this.showMore;
   }
 }
