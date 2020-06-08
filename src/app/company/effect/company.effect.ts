@@ -22,25 +22,37 @@ export class CompanyEffects {
     withLatestFrom(this.store$.pipe(select(selectCompanyPageInfo))),
     switchMap(([action, pageInfo]) => this.companyService.getCompanies(pageInfo)
       .pipe(
-        map( (res: ResponseGetCompanies) => companyActions.getCompaniesSuccess({companies: res.companies , pagination: res.pagination})),
-        catchError(e => of(companyActions.getCompaniesFailed()))
-      ))
+        map((res: ResponseGetCompanies) => companyActions.getCompaniesSuccess({ companies: res.companies, pagination: res.pagination })),
+        catchError(error => of(companyActions.getCompaniesFailed({ error }))
+        ))
+    )
+  ));
+
+  deleteCompany$ = createEffect(() => this.actions$.pipe(
+    ofType(companyActions.deleteCompany),
+    exhaustMap(action =>
+      this.companyService.deleteCompany(action.companyId).pipe(
+        map(res => companyActions.deleteCompanySuccess(),
+          catchError(error => of(companyActions.deleteCompanyFail({ error })))
+        )
+      )
+    )
   ));
 
   createCompany$ = createEffect(() => this.actions$.pipe(
     ofType(companyActions.createCompany),
-    mergeMap((action) => this.companyService.createCompany(action.company)
-      .pipe(
-        map((res: any) => companyActions.createCompanySuccessfully(),
-          catchError(() => EMPTY))
+    exhaustMap(action =>
+      this.companyService.createCompany(action.company).pipe(
+        map(res => companyActions.createCompanySuccess(),
+          catchError(error => of(companyActions.createCompanyFailed({error})))
+        )
       )
     )
   ));
 
   changPageNumber$ = createEffect(() => this.actions$.pipe(
     ofType(companyActions.changePageNumber),
-    switchMap((action) => of(companyActions.getCompanies())),
-    catchError(() => of(companyActions.getCompaniesFailed())
-  )));
+    map((action) => companyActions.getCompanies()),
+  ));
 }
 

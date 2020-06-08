@@ -39,9 +39,11 @@ export class CompanyComponent implements OnInit {
 
     }).then((result) => {
       if (result.value) {
-        this.companyService.deleteCompany(companyId).subscribe((res: any) => {
+        /*this.companyService.deleteCompany(companyId).subscribe((res: any) => {
           this.getCompanies();
-        });
+        });*/
+        this.store.dispatch(companyActions.deleteCompany({companyId}));
+        this.getCompanies();
         Swal.fire({
           text: 'Delete success',
           icon: 'success',

@@ -9,13 +9,12 @@ import { Company, SaveCompanyModel } from '../../models';
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
-  styleUrls: [ './update.component.scss' ]
+  styleUrls: ['./update.component.scss']
 })
 export class UpdateComponent implements OnInit {
-
-  idCompany: number;
+  companyId: number;
   infoCompany: SaveCompanyModel;
-
+  company: Company;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -25,22 +24,12 @@ export class UpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activateRoute.snapshot.params;
-
-    this.activateRoute.params
-      .pipe(
-        switchMap((params) => this.companyService.getCompanyById(params.id))
-      )
-      .subscribe((res: any) => {
-        this.infoCompany = res;
-      });
+    this.companyId = parseInt(this.activateRoute.snapshot.params.id, 10);
   }
 
   updateCompany(company: Company) {
     this.companyService.saveCompany(company, company.id).subscribe((res: any) => {
-      this.router.navigate([ '/companies' ]);
+      this.router.navigate(['/companies']);
     });
-
   }
-
 }

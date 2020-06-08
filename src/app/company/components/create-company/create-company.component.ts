@@ -28,6 +28,7 @@ export class CreateCompanyComponent implements OnInit {
     this.companyService.createCompany(this.company).subscribe((res: any) => {
       this.router.navigate([ '/companies' ]);
     });
+    console.log(company);
   }
 
 

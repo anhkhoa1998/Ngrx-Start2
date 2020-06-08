@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PaginationModule } from '@app/shared';
 import { EffectsModule} from '@ngrx/effects';
@@ -25,6 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     StoreModule.forFeature('company', companyReducer),
     EffectsModule.forFeature([CompanyEffects]),
     FontAwesomeModule,
+    ReactiveFormsModule,
   ],
   providers: [
     CompanyService,
