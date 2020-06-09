@@ -13,7 +13,7 @@ export interface PageInfo {
 
 export const defaultPageInfo = {
   currentPage: 1,
-  pageSize: 1,
+  pageSize: 4,
   totalCount: null,
   totalPages: null,
   hasPrevious: false,

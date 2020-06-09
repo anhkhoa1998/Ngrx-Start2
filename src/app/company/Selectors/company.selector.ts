@@ -25,6 +25,13 @@ export const selectCompanyUpdating = createSelector(
   }
 );
 
+export const selectPending = createSelector(
+  selectCompanyState,
+  (state) => {
+    return state && state.pending;
+  }
+);
+
 
 
 

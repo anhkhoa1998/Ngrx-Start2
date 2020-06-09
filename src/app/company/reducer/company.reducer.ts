@@ -41,13 +41,14 @@ const reducer = createReducer(
     });
   }),
   on(companyActions.getCompaniesFailed, (state, { error }) => ({ ...state, pending: false, error })),
-
   on(companyActions.createCompany, (state => ({ ...state, pending: true }))),
   on(companyActions.createCompanySuccess, (state => ({ ...state, pending: false, error: null }))),
   on(companyActions.createCompanyFailed, ((state, { error }) => ({ ...state, pending: false, error }))),
 
   on(companyActions.deleteCompany, (state => ({ ...state, pending: true }))),
-  on(companyActions.deleteCompanySuccess, (state => ({ ...state, pending: false, error: null }))),
+  on(companyActions.deleteCompanySuccess, (state, {companyId}) => {
+    return adapter.removeOne(companyId, {...state, error: null, pending: false});
+  }),
   on(companyActions.deleteCompanyFail, ((state, { error }) => ({ ...state, pending: false, error }))),
 
   on(companyActions.changePageNumber, ((state, { pageNumber }) => ({

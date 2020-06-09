@@ -30,18 +30,13 @@ export class CompanyService {
   createCompany(company: SaveCompanyModel) {
     return this.httpClient.post(`${ environment.apiUrl }/companies`, company);
   }
-
-  saveCompany(company: Company, id: number) {
+  updateCompany(company: Company, id: number) {
     return this.httpClient.put(`${ environment.apiUrl }/companies/${ id }`, company);
   }
-
-
   deleteCompany(companyId: number) {
     return this.httpClient.delete(`${ environment.apiUrl }/companies/${ companyId }`);
   }
-
   getCompanyById(companyId: number) {
     return this.httpClient.get(`${ environment.apiUrl }/companies/${ companyId }`);
   }
-
 }

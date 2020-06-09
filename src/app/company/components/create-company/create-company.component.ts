@@ -17,8 +17,6 @@ export class CreateCompanyComponent implements OnInit {
 
   company: SaveCompanyModel = new SaveCompanyModel();
 
-  buttonOperation = 'Create';
-
   constructor(private store: Store<CompanyState>, private router: Router) {
   }
 
@@ -28,5 +26,6 @@ export class CreateCompanyComponent implements OnInit {
 
   createCompany(company) {
     this.store.dispatch(companyActions.createCompany({company}));
+    this.router.navigate(['/companies']);
   }
 }

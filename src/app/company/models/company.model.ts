@@ -1,7 +1,7 @@
 import { PageInfo, Pagination } from '@app/shared';
 
 export interface Company {
-  id?: number;
+  id: number;
   no: string;
   name: string;
   established: Date;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { companyActions } from '@app/company/actions/index';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CompanyService } from '@app/company/services';
-import { catchError, exhaustMap, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, delay, exhaustMap, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectCompanyPageInfo } from '@app/company/Selectors/company.selector';
@@ -25,6 +25,7 @@ export class CompanyEffects {
     withLatestFrom(this.store$.pipe(select(selectCompanyPageInfo))),
     switchMap(([action, pageInfo]) => this.companyService.getCompanies(pageInfo)
       .pipe(
+        // delay(2000),
         map((res: ResponseGetCompanies) => companyActions.getCompaniesSuccess({ companies: res.companies, pagination: res.pagination })),
         catchError(error => of(companyActions.getCompaniesFailed({ error }))
         ))
@@ -48,7 +49,7 @@ export class CompanyEffects {
     ofType(companyActions.deleteCompany),
     exhaustMap(action =>
       this.companyService.deleteCompany(action.companyId).pipe(
-        map(res => companyActions.deleteCompanySuccess(),
+        map(res => companyActions.deleteCompanySuccess({companyId: action.companyId}),
           catchError(error => of(companyActions.deleteCompanyFail({ error })))
         )
       )
@@ -62,6 +63,17 @@ export class CompanyEffects {
         map(res => companyActions.createCompanySuccess(),
           catchError(error => of(companyActions.createCompanyFailed({ error })))
         )
+      )
+    )
+  ));
+
+  updateCompany$ = createEffect(() => this.actions$.pipe(
+    ofType(companyActions.updateCompany),
+    exhaustMap( action => this.companyService.updateCompany(action.company, action.companyId)
+      .pipe(
+        map( res => companyActions.updateCompanySuccess(),
+          catchError(error => of(companyActions.updateCompanyFail({error})))
+          )
       )
     )
   ));

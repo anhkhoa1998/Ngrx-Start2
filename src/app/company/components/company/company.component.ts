@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { CompanyState } from '@app/company/reducer/company.reducer';
 import { companyActions } from '@app/company/actions';
-import { selectAllCompanies, selectCompanyPageInfo } from '@app/company/Selectors/company.selector';
+import { selectAllCompanies, selectCompanyPageInfo, selectPending } from '@app/company/Selectors/company.selector';
 
 @Component({
   selector: 'app-company',
@@ -20,13 +20,15 @@ import { selectAllCompanies, selectCompanyPageInfo } from '@app/company/Selector
 export class CompanyComponent implements OnInit {
   companies$: Observable<Array<Company>>;
   pageInfo$: Observable<PageInfo>;
+  pending$: Observable<boolean>;
   faAngleDown = faAngleDown;
-  showMore = false;
+
   constructor(private companyService: CompanyService, private store: Store<CompanyState>) {
   }
   ngOnInit(): void {
     this.companies$ = this.store.pipe(select(selectAllCompanies));
     this.pageInfo$ = this.store.pipe(select(selectCompanyPageInfo));
+    this.pending$ = this.store.pipe(select(selectPending));
     this.getCompanies();
   }
   deleteCompany(companyId: number) {
@@ -35,23 +37,10 @@ export class CompanyComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-
+      cancelButtonText: 'No, keep it',
     }).then((result) => {
       if (result.value) {
-        /*this.companyService.deleteCompany(companyId).subscribe((res: any) => {
-          this.getCompanies();
-        });*/
         this.store.dispatch(companyActions.deleteCompany({companyId}));
-        this.getCompanies();
-        Swal.fire({
-          text: 'Delete success',
-          icon: 'success',
-          timer: 1000,
-          showConfirmButton: false,
-        });
-      } else {
-        return;
       }
     });
   }
@@ -64,7 +53,7 @@ export class CompanyComponent implements OnInit {
     this.store.dispatch(companyActions.changePageNumber({ pageNumber: page }));
   }
 
-  show(){
-    this.showMore = !this.showMore;
+  showMore(isShow: boolean) {
+    return isShow = !isShow;
   }
 }

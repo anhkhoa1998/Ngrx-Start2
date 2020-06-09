@@ -26,14 +26,15 @@
         <td><a href="mailto:{{ company.email }}">{{ company.email }}</a></td>
         <td>{{ company.established | date:"dd/MM/yyyy" }}</td>
         <td>
-          <div class="row">
-            <div>
-              <p *ngFor="let phoneNumber of company.companyPhoneNumbers; let i = index">
-                <span *ngIf="showMore || i == 0">{{ phoneNumber.phoneNumber }}</span>
-              </p>
-            </div>
-            <fa-icon [icon]="faAngleDown" class="btn-arrow-down" (click)="show()"></fa-icon>
-          </div>
+          <p>
+            {{company.companyPhoneNumbers[0].phoneNumber}}
+            <button class="btn-arrow-down" type="button" [attr.data-target]="'#phoneCollapse-' + company.id" aria-expanded="false" data-toggle="collapse" aria-controls="phoneCollapse" >
+              <fa-icon [icon]="faAngleDown" class="" ></fa-icon>
+            </button>
+          </p>
+          <p *ngFor="let phoneNumber of company.companyPhoneNumbers; let i = index;" id="phoneCollapse-{{ company.id }}" class="collapse">
+            <span *ngIf="i > 0">{{ phoneNumber.phoneNumber }}</span>
+          </p>
         </td>
         <td>{{ company.address }}</td>
         <td><a href="{{ company.website }}" target="_blank">{{ company.website }}</a></td>
@@ -46,7 +47,6 @@
           </button>
         </td>
       </tr>
-
       </tbody>
     </table>
 

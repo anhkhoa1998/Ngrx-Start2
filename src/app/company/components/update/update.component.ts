@@ -15,7 +15,6 @@ import { companyActions } from '@app/company/actions';
 })
 export class UpdateComponent implements OnInit {
   companyId: number;
-  infoCompany: Company;
   company$: Observable<Company>;
 
   constructor(
@@ -31,8 +30,7 @@ export class UpdateComponent implements OnInit {
   }
 
   updateCompany(company: Company) {
-    /*this.companyService.saveCompany(company, company.id).subscribe((res: any) => {
-      this.router.navigate(['/companies']);
-    });*/
+    this.store.dispatch(companyActions.updateCompany({companyId: company.id, company}));
+    this.router.navigate(['/companies']);
   }
 }

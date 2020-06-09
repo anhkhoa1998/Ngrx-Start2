@@ -35,7 +35,7 @@ export const createCompanySuccess = createAction(
 
 export const updateCompany = createAction(
   '[Company] Update Company',
-  props<{ companyId: number, company: SaveCompanyModel }>()
+  props<{ companyId: number, company: Company }>()
 );
 export const updateCompanySuccess = createAction(
   '[Company] Update Company Successfully'
@@ -50,7 +50,8 @@ export const deleteCompany = createAction(
   props<{ companyId: number }>()
 );
 export const deleteCompanySuccess = createAction(
-  '[Company] Delete Company Successfully'
+  '[Company] Delete Company Successfully',
+  props<{ companyId: number }>()
 );
 export const deleteCompanyFail = createAction(
   '[Company] Delete Company Failed',

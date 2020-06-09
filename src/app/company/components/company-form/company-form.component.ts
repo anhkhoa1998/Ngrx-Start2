@@ -51,6 +51,7 @@ export class CompanyFormComponent implements OnInit {
   onSubmit() {
     this.company = {
       ...this.rfCompany.value,
+      id: this.company ? this.company.id : null,
       companyPhoneNumbers: this.companyPhoneNumbers.controls.map(control => {
         return {
           phoneNumber: control.value,
