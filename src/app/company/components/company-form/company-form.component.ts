@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,19 +12,16 @@ import { SaveCompanyModel, Company } from '../../models';
   styleUrls: ['./company-form.component.scss']
 })
 export class CompanyFormComponent implements OnInit {
-  rfCompany: FormGroup;
-  @Input() butonOperation: string;
+  @Input() buttonOperation: string;
   @Input() company: Company;
-
   @Output() save = new EventEmitter();
+
+  rfCompany: FormGroup;
 
   constructor(private router: Router, private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-    if (!this.company) {
-      this.company = new SaveCompanyModel();
-    }
     this.rfCompany = this.fb.group({
       no: ['', Validators.required],
       name: ['', Validators.required],
@@ -31,11 +29,24 @@ export class CompanyFormComponent implements OnInit {
       email: [''],
       website: [''],
       address: [''],
-      companyPhoneNumbers: this.fb.array([
-        this.fb.control(''),
-      ])
+      companyPhoneNumbers: this.fb.array([])
     });
+
+    if (!this.company) {
+      this.companyPhoneNumbers.push(new FormControl(''));
+    } else {
+      this.rfCompany.get('no').setValue(this.company.no);
+      this.rfCompany.get('name').setValue(this.company.name);
+      this.rfCompany.get('established').setValue(formatDate(new Date(this.company.established), 'yyyy-MM-dd', 'en-US'));
+      this.rfCompany.get('email').setValue(this.company.email);
+      this.rfCompany.get('website').setValue(this.company.website);
+      this.rfCompany.get('address').setValue(this.company.address);
+      this.company.companyPhoneNumbers.map(
+        value => this.companyPhoneNumbers.push(new FormControl(value.phoneNumber))
+      );
+    }
   }
+
 
   onSubmit() {
     this.company = {
@@ -54,7 +65,7 @@ export class CompanyFormComponent implements OnInit {
   }
 
   addTel() {
-    this.companyPhoneNumbers.push(new FormControl());
+    this.companyPhoneNumbers.push(this.fb.control(''));
   }
 
   removeTel(index: number) {

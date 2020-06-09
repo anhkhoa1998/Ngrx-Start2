@@ -18,6 +18,13 @@ export const selectCompanyPageInfo = createSelector(
   }
 );
 
+export const selectCompanyUpdating = createSelector(
+  selectCompanyState,
+  (state) => {
+    return state && state.selectedCompany;
+  }
+);
+
 
 
 

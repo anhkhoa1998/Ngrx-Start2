@@ -57,6 +57,18 @@ export const deleteCompanyFail = createAction(
   props<{ error: HttpError}>()
 );
 
+export const getCompany = createAction(
+  '[Company] Get Company by Id'
+);
+export const getCompanySuccess = createAction(
+  '[Company] Get Company Successfully',
+  props<{ company: Company}>()
+);
+export const getCompanyFailed = createAction(
+  '[Company] Get Company Failed',
+  props<{ error: HttpError}>()
+);
+
 export const patchCompany = createAction(
   '[Company] Patch update Company',
   props<{ companyId: number, patch: PatchUpdateCompanyModel }>()

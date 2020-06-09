@@ -2,7 +2,7 @@
 
   <h2 class="company-form__title">Update Company</h2>
 
-  <app-company-form butonOperation="Update" *ngIf="infoCompany" [company]="infoCompany"
+  <app-company-form buttonOperation="Update" *ngIf="company$ | async" [company]="company$ | async"
                     (save)="updateCompany($event)">
   </app-company-form>
 

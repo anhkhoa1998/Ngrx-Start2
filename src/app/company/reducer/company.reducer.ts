@@ -9,6 +9,7 @@ export interface CompanyState extends EntityState<Company> {
   pageInfo: PageInfo;
   pending: boolean;
   error: HttpError;
+  selectedCompany: Company;
 }
 
 export const adapter: EntityAdapter<Company> = createEntityAdapter<Company>();
@@ -17,10 +18,15 @@ export const initialState: CompanyState = adapter.getInitialState({
   pageInfo: defaultPageInfo,
   pending: false,
   error: null,
+  selectedCompany: null,
 });
 
 const reducer = createReducer(
   initialState,
+
+  on(companyActions.getCompany, (state => ({ ...state, pending: true }))),
+  on(companyActions.getCompanySuccess, (state, { company }) => ({ ...state, pending: false, error: null, selectedCompany: company })),
+  on(companyActions.getCompanyFailed, (state, { error }) => ({ ...state, pending: false, error })),
 
   on(companyActions.getCompanies, (state => ({ ...state, pending: true }))),
   on(companyActions.getCompaniesSuccess, (state, { companies, pagination }) => {

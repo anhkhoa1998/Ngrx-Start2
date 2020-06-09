@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { ErrorHandlerInterceptor } from './error-handler.interceptor';
 import { reducers, metaReducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
+import { CustomRouterStateSerializer } from './store/reducers/router-serializer';
 
 @NgModule({
   declarations: [],
@@ -25,7 +26,7 @@ import { EffectsModule } from '@ngrx/effects';
         },
       },
     ),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     EffectsModule.forRoot(),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
   ],
@@ -34,7 +35,8 @@ import { EffectsModule } from '@ngrx/effects';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerInterceptor,
       multi: true,
-    }
+    },
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }
   ]
 })
 export class CoreModule {

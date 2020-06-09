@@ -4,9 +4,10 @@ import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
 
 import { logger } from '../meta-reducers';
+import { RouterStateModel } from './router.model';
 
 export interface AppState {
-  router: RouterReducerState;
+  router: RouterReducerState<RouterStateModel>;
 }
 
 export const reducers: ActionReducerMap<AppState, Action> = {

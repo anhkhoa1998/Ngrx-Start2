@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 
 import { CompanyService } from '../../services';
 import { SaveCompanyModel } from '../../models';
+import { Store } from '@ngrx/store';
+import { CompanyState } from '@app/company/reducer/company.reducer';
+import { companyActions } from '@app/company/actions';
 
 
 @Component({
@@ -14,9 +17,9 @@ export class CreateCompanyComponent implements OnInit {
 
   company: SaveCompanyModel = new SaveCompanyModel();
 
-  butonOperation = 'Create';
+  buttonOperation = 'Create';
 
-  constructor(private companyService: CompanyService, private router: Router) {
+  constructor(private store: Store<CompanyState>, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -24,12 +27,6 @@ export class CreateCompanyComponent implements OnInit {
   }
 
   createCompany(company) {
-    this.company = company;
-    this.companyService.createCompany(this.company).subscribe((res: any) => {
-      this.router.navigate([ '/companies' ]);
-    });
-    console.log(company);
+    this.store.dispatch(companyActions.createCompany({company}));
   }
-
-
 }

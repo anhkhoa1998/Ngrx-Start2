@@ -7,13 +7,16 @@ import { EMPTY, of } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectCompanyPageInfo } from '@app/company/Selectors/company.selector';
 import { CompanyState } from '@app/company/reducer/company.reducer';
-import { ResponseGetCompanies } from '@app/company/models';
+import { Company, ResponseGetCompanies } from '@app/company/models';
+import { AppState, selectRouterParams } from '@app/core/store';
+import { RouterStateModel } from '@app/core/store/reducers/router.model';
 
 
 @Injectable()
 export class CompanyEffects {
   constructor(private actions$: Actions,
               private store$: Store<CompanyState>,
+              private appStore$: Store<AppState>,
               private companyService: CompanyService) {
   }
 
@@ -25,6 +28,19 @@ export class CompanyEffects {
         map((res: ResponseGetCompanies) => companyActions.getCompaniesSuccess({ companies: res.companies, pagination: res.pagination })),
         catchError(error => of(companyActions.getCompaniesFailed({ error }))
         ))
+    )
+  ));
+
+  getCompany$ = createEffect(() => this.actions$.pipe(
+    ofType(companyActions.getCompany),
+    withLatestFrom(this.appStore$.pipe(select(selectRouterParams))),
+    switchMap(([action, routerParams]) => {
+        console.log(routerParams);
+        return this.companyService.getCompanyById(routerParams.id).pipe(
+          map((res: Company) => companyActions.getCompanySuccess({ company: res })),
+          catchError(error => of(companyActions.getCompanyFailed({ error })))
+        );
+      }
     )
   ));
 
@@ -44,7 +60,7 @@ export class CompanyEffects {
     exhaustMap(action =>
       this.companyService.createCompany(action.company).pipe(
         map(res => companyActions.createCompanySuccess(),
-          catchError(error => of(companyActions.createCompanyFailed({error})))
+          catchError(error => of(companyActions.createCompanyFailed({ error })))
         )
       )
     )
